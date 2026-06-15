@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaskFlow</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+    nav { display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem; }
+    .flash { padding: 0.75rem 1rem; background: #f0f4ff; border: 1px solid #c7d2fe; margin-bottom: 1rem; }
+    form { display: grid; gap: 0.75rem; max-width: 420px; }
+    label { display: grid; gap: 0.25rem; }
+    input { padding: 0.6rem; }
+    button { width: fit-content; padding: 0.6rem 1rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('index') }}">Home</a>
+    {% if g.user %}
+      <span>Signed in as {{ g.user['name'] }} ({{ g.user['email'] }})</span>
+      <form action="{{ url_for('logout') }}" method="post">
+        <button type="submit">Log out</button>
+      </form>
+    {% else %}
+      <a href="{{ url_for('signup') }}">Sign up</a>
+      <a href="{{ url_for('login') }}">Log in</a>
+    {% endif %}
+  </nav>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</body>
+</html>
