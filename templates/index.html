@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="card">
+    <h1>Welcome to TaskFlow</h1>
+    <p>Accounts and authentication are ready.</p>
+    {% if g.user %}
+      <p><a href="{{ url_for('dashboard') }}">Go to your dashboard</a></p>
+    {% else %}
+      <p><a href="{{ url_for('signup') }}">Create an account</a> or <a href="{{ url_for('login') }}">log in</a>.</p>
+    {% endif %}
+  </div>
+{% endblock %}

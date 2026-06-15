@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="card">
+    <h1>Dashboard</h1>
+    <p>Welcome, {{ g.user['name'] }}.</p>
+    <p>Your TaskFlow account is authenticated with a server-side session.</p>
+    <p>Email: {{ g.user['email'] }}</p>
+  </div>
+{% endblock %}
