@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>TaskFlow</h1>
+  {% if g.user %}
+    <p>You are signed in as <strong>{{ g.user['name'] }}</strong> ({{ g.user['email'] }}).</p>
+    <p>Your server-side session is active.</p>
+  {% else %}
+    <p>Welcome to TaskFlow. Create an account or log in to continue.</p>
+    <p>Passwords must be at least {{ min_password_length }} characters long.</p>
+  {% endif %}
+{% endblock %}
