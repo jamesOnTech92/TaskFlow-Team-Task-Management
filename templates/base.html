@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaskFlow</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+    nav { display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem; }
+    nav form { display: inline; }
+    .flash { padding: 0.75rem 1rem; background: #eef6ff; border: 1px solid #b7d4ff; margin-bottom: 1rem; border-radius: 6px; }
+    form { display: grid; gap: 0.75rem; max-width: 420px; }
+    input { padding: 0.65rem; border: 1px solid #ccc; border-radius: 6px; }
+    button { padding: 0.7rem 1rem; border: 0; border-radius: 6px; background: #2563eb; color: white; cursor: pointer; }
+    a { color: #2563eb; text-decoration: none; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 1.25rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('index') }}">TaskFlow</a>
+    {% if g.user %}
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <span>Signed in as {{ g.user['name'] }}</span>
+      <form method="post" action="{{ url_for('logout') }}">
+        <button type="submit">Log out</button>
+      </form>
+    {% else %}
+      <a href="{{ url_for('signup') }}">Sign up</a>
+      <a href="{{ url_for('login') }}">Log in</a>
+    {% endif %}
+  </nav>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</body>
+</html>
